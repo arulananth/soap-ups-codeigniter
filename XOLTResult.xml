@@ -1,0 +1,8 @@
+Request: 
+<?xml version="1.0"?>
+<AccessRequest><AccessLicenseNumber>1D5D93ACAAC0A1EA</AccessLicenseNumber><UserId>maxim_develop</UserId><Password>Development1</Password></AccessRequest>
+<?xml version="1.0"?>
+<RatingServiceSelectionRequest><Request><RequestAction>Rate</RequestAction><RequestOption>Rate</RequestOption></Request><Shipment><Shipper><Name>Arul An</Name><ShipperNumber>9994667490</ShipperNumber><Address><AddressLine1>Holy cross road</AddressLine1><City>Nagercoil</City><PostalCode>629252</PostalCode><CountryCode>IND</CountryCode></Address></Shipper><ShipTo><CompanyName>Ananth</CompanyName><Address><AddressLine1>ECR Road</AddressLine1><City>Kottivakkam</City><PostalCode>600041</PostalCode><CountryCode>IND</CountryCode></Address></ShipTo><ShipFrom><CompanyName>Sotushot</CompanyName><Address><AddressLine1>Port street 5 ,Main Road</AddressLine1><City>Colachel</City><StateProvinceCode>TN</StateProvinceCode><PostalCode>629251</PostalCode><CountryCode>IND</CountryCode></Address></ShipFrom><Service><Code>02</Code><Description>2nd Day Air</Description></Service><Package><PackagingType><Code>02</Code><Description>UPS Package</Description></PackagingType><PackageWeight><UnitOfMeasurement><Code>LBS</Code></UnitOfMeasurement><Weight>15.2</Weight></PackageWeight></Package></Shipment></RatingServiceSelectionRequest>
+
+Response: 
+{"Error":{"Code":"4","Description":"JSON Syntax error"}}

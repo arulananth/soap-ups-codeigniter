@@ -1,0 +1,1667 @@
+<?php 
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/*
+| -------------------------------------------------------------------
+| UPS Account Setting
+| -------------------------------------------------------------------
+*/
+$config['ups']['account'] = array(
+	'access' => '1D5D93ACAAC0A1EA',
+	'userid' => 'maxim_develop',
+	'passwd' => 'Development1',
+	'shipperNumber' => '******',
+	'mode' => 'test' // production
+);
+$config['ups']['urls'] = array(
+	'rating' => ( $config['ups']['account']['mode'] == 'test' ) ? 'https://wwwcie.ups.com/rest/Rate' : 'https://wwwcie.ups.com/rest/Rate',
+	'shipping' => ( $config['ups']['account']['mode'] == 'test' ) ? 'https://wwwcie.ups.com/rest/Ship' : 'https://onlinetools.ups.com/rest/Ship',
+	'tracking' => ( $config['ups']['account']['mode'] == 'test' ) ? 'https://wwwcie.ups.com/rest/Track' : 'https://onlinetools.ups.com/rest/Track'
+);
+/*
+| -------------------------------------------------------------------
+| UPS Shipper
+| -------------------------------------------------------------------
+*/
+$config['ups']['shipper'] = array(
+	'Description' => 'Service',
+	'Name' => 'Franco',
+	'AttentionName' => 'Maxim Italy',
+	'AddressLine' => array(
+		'Via Eraclea 5H',
+		'Jesolo'
+	),
+	'City' => 'Jesolo',
+	'StateProvinceCode' => 'VE',
+	'PostalCode' => '30016',
+	'CountryCode' => 'IT',
+	'Number' => '9994667490'
+);
+
+/*
+| -------------------------------------------------------------------
+| UPS Serivce Type
+| -------------------------------------------------------------------
+*/
+$config['ups']['services'] = array(
+	'01' => 'UPS Next Day Air',
+	'02' => 'UPS 2nd Day Air',
+	'03' => 'UPS Ground',
+	'07' => 'UPS Worldwide Express',
+	'08' => 'UPS Worldwide Expedited',
+	'11' => 'UPS Standard',
+	'12' => 'UPS 3 Day Select',
+	'13' => 'UPS Next Day Air Saver',
+	'14' => 'UPS Next Day Air Early A.M.',
+	'54' => 'UPS Worldwide Express Plus',
+	'59' => 'UPS 2nd Day Air AM',
+	'65' => 'UPS World Wide Saver'
+);
+
+$config['form_ups']=array(
+  "shipper_company_name" => "Maxim Italy",
+				"shipper_address_one" => "Via Eraclea 5H",
+				"shipper_address_two" => "",
+				"shipper_address_three" => "",
+				"shipper_city" => "Jesolo",
+				"shipper_country" => "CN",
+				"shipper_state_code" => "VE",
+				"shipper_postal_code" => "30016",
+
+  "from_company_name" => "Company ABC",
+				"from_address_one" => "Block 35, No.8",
+				"from_address_two" => "HongJiang Road",
+				"from_address_three" => "JinShan PuShang Industrial Zone",
+				"from_city" => "Fujian",
+				"from_country" => "CN",
+				"from_state_code" => "FJ",
+				"from_postal_code" => "350003",
+
+   "to_company_name" => "Company ABC",
+				"to_address_one" => "Via Di Vittorio 17 ",
+				"to_address_two" => "",
+				"to_address_three" => "",
+				"to_city" => "San Dona di Piave",
+				"to_country" => "IT",
+				"to_state_code" => "VE",
+				"to_postal_code" => "30027",
+   "dim_weight" => "12",
+				"dim_height" => "30",
+				"dim_length" => "34",
+				"dim_width" => "20",
+);
+
+$configp['composer']=TRUE;
+
+/*
+|--------------------------------------------------------------------------
+| Base Site URL
+|--------------------------------------------------------------------------
+|
+| URL to your CodeIgniter root. Typically this will be your base URL,
+| WITH a trailing slash:
+|
+|	http://example.com/
+|
+| If this is not set then CodeIgniter will try guess the protocol, domain
+| and path to your installation. However, you should always configure this
+| explicitly and never rely on auto-guessing, especially in production
+| environments.
+|
+*/
+//$config['base_url'] = 'https://www.viaemandalcul.com/';
+
+$config['base_url'] = base_url;
+
+/*
+|--------------------------------------------------------------------------
+| Index File
+|--------------------------------------------------------------------------
+|
+| Typically this will be your index.php file, unless you've renamed it to
+| something else. If you are using mod_rewrite to remove the page set this
+| variable so that it is blank.
+|
+*/
+$config['index_page'] = 'index.php';
+
+/*
+|--------------------------------------------------------------------------
+| URI PROTOCOL
+|--------------------------------------------------------------------------
+|
+| This item determines which server global should be used to retrieve the
+| URI string.  The default setting of 'AUTO' works for most servers.
+| If your links do not seem to work, try one of the other delicious flavors:
+|
+| 'AUTO'		Default - auto detects
+| 'CLI' or 'argv'	Uses $_SERVER['argv'] (for php-cli only)
+| 'PATH_INFO'		Uses $_SERVER['PATH_INFO']
+| 'REQUEST_URI'		Uses $_SERVER['REQUEST_URI']
+| 'QUERY_STRING'	Uses $_SERVER['QUERY_STRING']
+|
+*/
+$config['uri_protocol']	= 'AUTO';
+
+/*
+|--------------------------------------------------------------------------
+| URL suffix
+|--------------------------------------------------------------------------
+|
+| This option allows you to add a suffix to all URLs generated by CodeIgniter.
+| For more information please see the user guide:
+|
+| http://codeigniter.com/user_guide/general/urls.html
+*/
+
+$config['url_suffix'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| Default Language
+|--------------------------------------------------------------------------
+|
+| This determines which set of language files should be used. Make sure
+| there is an available translation if you intend to use something other
+| than english.
+|
+*/
+
+if(!isset($_COOKIE['session_id']))
+{
+	setcookie("session_id",time().str_replace(":","",$_SERVER['REMOTE_ADDR']),time()+(86400*10) *( 30));
+}
+
+/*if(isset($_COOKIE['LAN']))
+
+$config['language'] = $_COOKIE['LAN'];
+else
+*/
+$config['language'] = "italy";
+$config["lang_key_meta"]=array("en"=>"english","it"=>"italiano","es"=>"español","fr"=>"français","da"=>"dansk","nl"=>"dutch","sv"=>"svensk","ru"=>"русский");
+$config["lang_key"]=array("en"=>"english","it"=>"italy","es"=>"spain","fr"=>"french","da"=>"danish","nl"=>"dutch","sv"=>"swedish","ru"=>"russian");
+$config["lang_item_lan"]=array("/en"=>"/en",'/it'=>'/it','/es'=>'/es','/fr'=>'/fr','/da'=>'/da','/nl'=>'/nl','/sv'=>'/sv','/ru'=>'/ru');
+$config["lang_item"]=array("en"=>"en",'it'=>'it','es'=>'es','fr'=>'fr','da'=>'da','nl'=>'nl','sv'=>'sv','ru'=>'ru');
+$config["lang_db"]=array("1"=>"en",'2'=>'it','3'=>'es','4'=>'da','5'=>'sv','6'=>'nl','7'=>'ru','8'=>'fr');
+/*
+|--------------------------------------------------------------------------
+| Default Character Set
+|--------------------------------------------------------------------------
+|
+| This determines which character set is used by default in various methods
+| that require a character set to be provided.
+|
+| See http://php.net/htmlspecialchars for a list of supported charsets.
+|
+*/ 
+	
+$config['charset'] = 'UTF-8'; 
+
+$config["currency"]=array("EUR","USD","DKK","GBP","SEK","NOK","AUD","RUB");
+$config["currency_db"]=array("EUR"=>"EUR",'USD'=>'USD','DKK'=>'DKK','GBP'=>'GBP','SEK'=>'SEK','NOK'=>'NOK','AUD'=>'AUD','RUB'=>'RUB');
+
+/*
+|--------------------------------------------------------------------------
+| Enable/Disable System Hooks
+|--------------------------------------------------------------------------
+|
+| If you would like to use the 'hooks' feature you must enable it by
+| setting this variable to TRUE (boolean).  See the user guide for details.
+|
+*/
+$config['enable_hooks'] = TRUE;
+
+/*
+|--------------------------------------------------------------------------
+| Class Extension Prefix
+|--------------------------------------------------------------------------
+|
+| This item allows you to set the filename/classname prefix when extending
+| native libraries.  For more information please see the user guide:
+|
+| http://codeigniter.com/user_guide/general/core_classes.html
+| http://codeigniter.com/user_guide/general/creating_libraries.html
+|
+*/
+$config['subclass_prefix'] = 'MY_';
+
+/*
+|--------------------------------------------------------------------------
+| Composer auto-loading
+|--------------------------------------------------------------------------
+|
+| Enabling this setting will tell CodeIgniter to look for a Composer
+| package auto-loader script in application/vendor/autoload.php.
+|
+|	$config['composer_autoload'] = TRUE;
+|
+| Or if you have your vendor/ directory located somewhere else, you
+| can opt to set a specific path as well:
+|
+|	$config['composer_autoload'] = '/path/to/vendor/autoload.php';
+|
+| For more information about Composer, please visit http://getcomposer.org/
+|
+| Note: This will NOT disable or override the CodeIgniter-specific
+|	autoloading (application/config/autoload.php)
+*/
+$config['composer_autoload'] = TRUE;
+
+/*
+|--------------------------------------------------------------------------
+| Allowed URL Characters
+|--------------------------------------------------------------------------
+|
+| This lets you specify which characters are permitted within your URLs.
+| When someone tries to submit a URL with disallowed characters they will
+| get a warning message.
+|
+| As a security measure you are STRONGLY encouraged to restrict URLs to
+| as few characters as possible.  By default only these are allowed: a-z 0-9~%.:_-
+|
+| Leave blank to allow all characters -- but only if you are insane.
+|
+| The configured value is actually a regular expression character group
+| and it will be executed as: ! preg_match('/^[<permitted_uri_chars>]+$/i
+|
+| DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
+|
+*/
+$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
+
+
+/*
+|--------------------------------------------------------------------------
+| Enable Query Strings
+|--------------------------------------------------------------------------
+|
+| By default CodeIgniter uses search-engine friendly segment based URLs:
+| example.com/who/what/where/
+|
+| By default CodeIgniter enables access to the $_GET array.  If for some
+| reason you would like to disable it, set 'allow_get_array' to FALSE.
+|
+| You can optionally enable standard query string based URLs:
+| example.com?who=me&what=something&where=here
+|
+| Options are: TRUE or FALSE (boolean)
+|
+| The other items let you set the query string 'words' that will
+| invoke your controllers and its functions:
+| example.com/index.php?c=controller&m=function
+|
+| Please note that some of the helpers won't work as expected when
+| this feature is enabled, since CodeIgniter is designed primarily to
+| use segment based URLs.
+|
+*/
+$config['allow_get_array'] = TRUE;
+$config['enable_query_strings'] = FALSE;
+$config['controller_trigger'] = 'c';
+$config['function_trigger'] = 'm';
+$config['directory_trigger'] = 'd';
+
+/*
+|--------------------------------------------------------------------------
+| Error Logging Threshold
+|--------------------------------------------------------------------------
+|
+| If you have enabled error logging, you can set an error threshold to
+| determine what gets logged. Threshold options are:
+| You can enable error logging by setting a threshold over zero. The
+| threshold determines what gets logged. Threshold options are:
+|
+|	0 = Disables logging, Error logging TURNED OFF
+|	1 = Error Messages (including PHP errors)
+|	2 = Debug Messages
+|	3 = Informational Messages
+|	4 = All Messages
+|
+| You can also pass in a array with threshold levels to show individual error types
+|
+| 	array(2) = Debug Messages, without Error Messages
+|
+| For a live site you'll usually only enable Errors (1) to be logged otherwise
+| your log files will fill up very fast.
+|
+*/
+$config['log_threshold'] = 0;
+
+/*
+|--------------------------------------------------------------------------
+| Error Logging Directory Path
+|--------------------------------------------------------------------------
+|
+| Leave this BLANK unless you would like to set something other than the default
+| application/logs/ directory. Use a full server path with trailing slash.
+|
+*/
+$config['log_path'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| Log File Extension
+|--------------------------------------------------------------------------
+|
+| The default filename extension for log files. The default 'php' allows for
+| protecting the log files via basic scripting, when they are to be stored
+| under a publicly accessible directory.
+|
+| Note: Leaving it blank will default to 'php'.
+|
+*/
+$config['log_file_extension'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| Log File Permissions
+|--------------------------------------------------------------------------
+|
+| The file system permissions to be applied on newly created log files.
+|
+| IMPORTANT: This MUST be an integer (no quotes) and you MUST use octal
+|            integer notation (i.e. 0700, 0644, etc.)
+*/
+$config['log_file_permissions'] = 0644;
+
+/*
+|--------------------------------------------------------------------------
+| Date Format for Logs
+|--------------------------------------------------------------------------
+|
+| Each item that is logged has an associated date. You can use PHP date
+| codes to set your own date formatting
+|
+*/
+$config['log_date_format'] = 'Y-m-d H:i:s';
+
+/*
+|--------------------------------------------------------------------------
+| Error Views Directory Path
+|--------------------------------------------------------------------------
+|
+| Leave this BLANK unless you would like to set something other than the default
+| application/views/errors/ directory.  Use a full server path with trailing slash.
+|
+*/
+$config['error_views_path'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| Cache Directory Path
+|--------------------------------------------------------------------------
+|
+| Leave this BLANK unless you would like to set something other than the default
+| application/cache/ directory.  Use a full server path with trailing slash.
+|
+*/
+$config['cache_path'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| Cache Include Query String
+|--------------------------------------------------------------------------
+|
+| Set this to TRUE if you want to use different cache files depending on the
+| URL query string.  Please be aware this might result in numerous cache files.
+|
+*/
+$config['cache_query_string'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Encryption Key
+|--------------------------------------------------------------------------
+|
+| If you use the Encryption class, you must set an encryption key.
+| See the user guide for more info.
+|
+| http://codeigniter.com/user_guide/libraries/encryption.html
+|
+*/
+$config['encryption_key'] = 'omeguru';
+
+/*
+|--------------------------------------------------------------------------
+| Session Variables
+|--------------------------------------------------------------------------
+|
+| 'sess_driver'
+|
+|	The storage driver to use: files, database, redis, memcached
+|
+| 'sess_cookie_name'
+|
+|	The session cookie name, must contain only [0-9a-z_-] characters
+|
+| 'sess_expiration'
+|
+|	The number of SECONDS you want the session to last.
+|	Setting to 0 (zero) means expire when the browser is closed.
+|
+| 'sess_save_path'
+|
+|	The location to save sessions to, driver dependant.
+|
+|	For the 'files' driver, it's a path to a writable directory.
+|	For the 'database' driver, it's a table name.
+|	Please read up the manual for the format with other session drivers.
+|
+|	IMPORTANT: You are REQUIRED to set a valid save path!
+|
+| 'sess_match_ip'
+|
+|	Whether to match the user's IP address when reading the session data.
+|
+| 'sess_time_to_update'
+|
+|	How many seconds between CI regenerating the session ID.
+|
+| Other session cookie settings are shared with the rest of the application,
+| except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
+|
+*/
+$config['sess_driver'] = 'database';
+$config['sess_cookie_name'] = 'ci_session';
+$config['sess_expiration'] = 86400; // 0 = Session does not expire
+//$config['sess_save_path'] = 'ci_session';
+$config['sess_save_path'] = NULL;
+$config['sess_match_ip'] = FALSE;
+$config['sess_time_to_update'] = 300; // 0 = Disable session ID regeneration
+
+/*
+|--------------------------------------------------------------------------
+| Cookie Related Variables
+|--------------------------------------------------------------------------
+|
+| 'cookie_prefix'   = Set a cookie name prefix if you need to avoid collisions
+| 'cookie_domain'   = Set to .your-domain.com for site-wide cookies
+| 'cookie_path'     = Typically will be a forward slash
+| 'cookie_secure'   = Cookie will only be set if a secure HTTPS connection exists.
+| 'cookie_httponly' = Cookie will only be accessible via HTTP(S) (no javascript)
+|
+| Note: These settings (with the exception of 'cookie_prefix' and
+|       'cookie_httponly') will also affect sessions.
+|
+*/
+$config['cookie_prefix']	= '';
+$config['cookie_domain']	= '';
+$config['cookie_path']		= '/';
+$config['cookie_secure']	= FALSE;
+$config['cookie_httponly'] 	= FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Standardize newlines
+|--------------------------------------------------------------------------
+|
+| Determines whether to standardize newline characters in input data,
+| meaning to replace \r\n, \r, \n occurences with the PHP_EOL value.
+|
+| This is particularly useful for portability between UNIX-based OSes,
+| (usually \n) and Windows (\r\n).
+|
+*/
+$config['standardize_newlines'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Global XSS Filtering
+|--------------------------------------------------------------------------
+|
+| Determines whether the XSS filter is always active when GET, POST or
+| COOKIE data is encountered
+|
+*/
+$config['global_xss_filtering'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Cross Site Request Forgery
+|--------------------------------------------------------------------------
+| Enables a CSRF cookie token to be set. When set to TRUE, token will be
+| checked on a submitted form. If you are accepting user data, it is strongly
+| recommended CSRF protection be enabled.
+|
+| 'csrf_token_name' = The token name
+| 'csrf_cookie_name' = The cookie name
+| 'csrf_expire' = The number in seconds the token should expire.
+| 'csrf_regenerate' = Regenerate token on every submission
+| 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
+*/
+$config['csrf_protection'] = FALSE;
+$config['csrf_token_name'] = 'csrf_test_name';
+$config['csrf_cookie_name'] = 'csrf_cookie_name';
+$config['csrf_expire'] = 7200;
+$config['csrf_regenerate'] = TRUE;
+$config['csrf_exclude_uris'] = array();
+
+/*
+|--------------------------------------------------------------------------
+| Output Compression
+|--------------------------------------------------------------------------
+|
+| Enables Gzip output compression for faster page loads.  When enabled,
+| the output class will test whether your server supports Gzip.
+| Even if it does, however, not all browsers support compression
+| so enable only if you are reasonably sure your visitors can handle it.
+|
+| Only used if zlib.output_compression is turned off in your php.ini.
+| Please do not use it together with httpd-level output compression.
+|
+| VERY IMPORTANT:  If you are getting a blank page when compression is enabled it
+| means you are prematurely outputting something to your browser. It could
+| even be a line of whitespace at the end of one of your scripts.  For
+| compression to work, nothing can be sent before the output buffer is called
+| by the output class.  Do not 'echo' any values with compression enabled.
+|
+*/
+$config['compress_output'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Master Time Reference
+|--------------------------------------------------------------------------
+|
+| Options are 'local' or any PHP supported timezone. This preference tells
+| the system whether to use your server's local time as the master 'now'
+| reference, or convert it to the configured one timezone. See the 'date
+| helper' page of the user guide for information regarding date handling.
+|
+*/
+$config['time_reference'] = 'local';
+
+/*
+|--------------------------------------------------------------------------
+| Rewrite PHP Short Tags
+|--------------------------------------------------------------------------
+|
+| If your PHP installation does not have short tag support enabled CI
+| can rewrite the tags on-the-fly, enabling you to utilize that syntax
+| in your view files.  Options are TRUE or FALSE (boolean)
+|
+*/
+$config['rewrite_short_tags'] = FALSE;
+
+
+/*
+|--------------------------------------------------------------------------
+| Reverse Proxy IPs
+|--------------------------------------------------------------------------
+|
+| If your server is behind a reverse proxy, you must whitelist the proxy
+| IP addresses from which CodeIgniter should trust headers such as
+| HTTP_X_FORWARDED_FOR and HTTP_CLIENT_IP in order to properly identify
+| the visitor's IP address.
+|
+| You can use both an array or a comma-separated list of proxy addresses,
+| as well as specifying whole subnets. Here are a few examples:
+|
+| Comma-separated:	'10.0.1.200,192.168.5.0/24'
+| Array:		array('10.0.1.200', '192.168.5.0/24')
+*/
+$config['proxy_ips'] = '';
+$config["acc_image"]=SERVER_PATH_MAIN."images/accessories/";
+$config['sess_use_database'] = TRUE;
+
+$config['sess_table_name'] = 'ci_sessions';
+
+$config["vat_country"]=array("italy","italia","italia");
+
+$config["lang_array_small"]=array("1"=>"en","2"=>"it","3"=>"es","4"=>"da","5"=>"sv","6"=>"nl","7"=>"ru","8"=>"fr");
+
+
+$config["sample"]="20.00";
+$config['property_array']=array("store_acc","store_buckle","store_card","store_dimension","store_metal","store_safety","store_usb","store_color","store_star","store_ncolor","store_pack","store_material", "store_shaft", "store_slice");
+$config["countryList"]= array(
+	"Africa" => array(
+		"DZ" => "Algeria",
+		"AO" => "Angola",
+		"BJ" => "Benin",
+		"BW" => "Botswana",
+		"BF" => "Burkina Faso",
+		"BI" => "Burundi",
+		"CM" => "Cameroon",
+		"CV" => "Cape Verde",
+		"CF" => "Central African Republic",
+		"TD" => "Chad",
+		"KM" => "Comoros",
+		"CG" => "Congo - Brazzaville",
+		"CD" => "Congo - Kinshasa",
+		"CI" => "Côte d’Ivoire",
+		"DJ" => "Djibouti",
+		"EG" => "Egypt",
+		"GQ" => "Equatorial Guinea",
+		"ER" => "Eritrea",
+		"ET" => "Ethiopia",
+		"GA" => "Gabon",
+		"GM" => "Gambia",
+		"GH" => "Ghana",
+		"GN" => "Guinea",
+		"GW" => "Guinea-Bissau",
+		"KE" => "Kenya",
+		"LS" => "Lesotho",
+		"LR" => "Liberia",
+		"LY" => "Libya",
+		"MG" => "Madagascar",
+		"MW" => "Malawi",
+		"ML" => "Mali",
+		"MR" => "Mauritania",
+		"MU" => "Mauritius",
+		"YT" => "Mayotte",
+		"MA" => "Morocco",
+		"MZ" => "Mozambique",
+		"NA" => "Namibia",
+		"NE" => "Niger",
+		"NG" => "Nigeria",
+		"RW" => "Rwanda",
+		"RE" => "Réunion",
+		"SH" => "Saint Helena",
+		"SN" => "Senegal",
+		"SC" => "Seychelles",
+		"SL" => "Sierra Leone",
+		"SO" => "Somalia",
+		"ZA" => "South Africa",
+		"SD" => "Sudan",
+		"SZ" => "Swaziland",
+		"ST" => "São Tomé and Príncipe",
+		"TZ" => "Tanzania",
+		"TG" => "Togo",
+		"TN" => "Tunisia",
+		"UG" => "Uganda",
+		"EH" => "Western Sahara",
+		"ZM" => "Zambia",
+		"ZW" => "Zimbabwe",
+	),
+	"Americas" => array(
+		"AI" => "Anguilla",
+		"AG" => "Antigua and Barbuda",
+		"AR" => "Argentina",
+		"AW" => "Aruba",
+		"BS" => "Bahamas",
+		"BB" => "Barbados",
+		"BZ" => "Belize",
+		"BM" => "Bermuda",
+		"BO" => "Bolivia",
+		"BR" => "Brazil",
+		"VG" => "British Virgin Islands",
+		"CA" => "Canada",
+		"KY" => "Cayman Islands",
+		"CL" => "Chile",
+		"CO" => "Colombia",
+		"CR" => "Costa Rica",
+		"CU" => "Cuba",
+		"DM" => "Dominica",
+		"DO" => "Dominican Republic",
+		"EC" => "Ecuador",
+		"SV" => "El Salvador",
+		"FK" => "Falkland Islands",
+		"GF" => "French Guiana",
+		"GL" => "Greenland",
+		"GD" => "Grenada",
+		"GP" => "Guadeloupe",
+		"GT" => "Guatemala",
+		"GY" => "Guyana",
+		"HT" => "Haiti",
+		"HN" => "Honduras",
+		"JM" => "Jamaica",
+		"MQ" => "Martinique",
+		"MX" => "Mexico",
+		"MS" => "Montserrat",
+		"AN" => "Netherlands Antilles",
+		"NI" => "Nicaragua",
+		"PA" => "Panama",
+		"PY" => "Paraguay",
+		"PE" => "Peru",
+		"PR" => "Puerto Rico",
+		"BL" => "Saint Barthélemy",
+		"KN" => "Saint Kitts and Nevis",
+		"LC" => "Saint Lucia",
+		"MF" => "Saint Martin",
+		"PM" => "Saint Pierre and Miquelon",
+		"VC" => "Saint Vincent and the Grenadines",
+		"SR" => "Suriname",
+		"TT" => "Trinidad and Tobago",
+		"TC" => "Turks and Caicos Islands",
+		"VI" => "U.S. Virgin Islands",
+		"US" => "United States",
+		"UY" => "Uruguay",
+		"VE" => "Venezuela",
+	),
+	"Asia" => array(
+		"AF" => "Afghanistan",
+		"AM" => "Armenia",
+		"AZ" => "Azerbaijan",
+		"BH" => "Bahrain",
+		"BD" => "Bangladesh",
+		"BT" => "Bhutan",
+		"BN" => "Brunei",
+		"KH" => "Cambodia",
+		"CN" => "China",
+		"CY" => "Cyprus",
+		"GE" => "Georgia",
+		"HK" => "Hong Kong SAR China",
+		"IN" => "India",
+		"ID" => "Indonesia",
+		"IR" => "Iran",
+		"IQ" => "Iraq",
+		"IL" => "Israel",
+		"JP" => "Japan",
+		"JO" => "Jordan",
+		"KZ" => "Kazakhstan",
+		"KW" => "Kuwait",
+		"KG" => "Kyrgyzstan",
+		"LA" => "Laos",
+		"LB" => "Lebanon",
+		"MO" => "Macau SAR China",
+		"MY" => "Malaysia",
+		"MV" => "Maldives",
+		"MN" => "Mongolia",
+		"MM" => "Myanmar [Burma]",
+		"NP" => "Nepal",
+		"NT" => "Neutral Zone",
+		"KP" => "North Korea",
+		"OM" => "Oman",
+		"PK" => "Pakistan",
+		"PS" => "Palestinian Territories",
+		"YD" => "People's Democratic Republic of Yemen",
+		"PH" => "Philippines",
+		"QA" => "Qatar",
+		"SA" => "Saudi Arabia",
+		"SG" => "Singapore",
+		"KR" => "South Korea",
+		"LK" => "Sri Lanka",
+		"SY" => "Syria",
+		"TW" => "Taiwan",
+		"TJ" => "Tajikistan",
+		"TH" => "Thailand",
+		"TL" => "Timor-Leste",
+		"TR" => "Turkey",
+		"TM" => "Turkmenistan",
+		"AE" => "United Arab Emirates",
+		"UZ" => "Uzbekistan",
+		"VN" => "Vietnam",
+		"YE" => "Yemen",
+	),
+	"Europe" => array(
+		"AL" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"AD" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"AT" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"BY" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"BE" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"BA" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"BG" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"HR" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"CY" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"CZ" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"DK" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"DD" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"EE" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"FO" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"FI" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"FR" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"DE" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"GI" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"GR" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"GG" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"HU" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"IS" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"IE" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"IM" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"IT" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private","3"=>"lang_reg_freelance","4"=>"lang_reg_ass")),
+		"JE" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"LV" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"LI" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"LT" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"LU" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"MK" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"MT" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"FX" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"MD" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"MC" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"ME" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"NL" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"NO" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"PL" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"PT" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"RO" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"RU" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"SM" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"RS" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"CS" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"SK" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"SI" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"ES" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"SJ" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"SE" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"CH" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"UA" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"SU" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"GB" => array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"VA" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"AX" => array("vat"=>false,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+	),
+	"Oceania" => array(
+		"AS" => "American Samoa",
+		"AQ" => "Antarctica",
+		"AU" => "Australia",
+		"BV" => "Bouvet Island",
+		"IO" => "British Indian Ocean Territory",
+		"CX" => "Christmas Island",
+		"CC" => "Cocos [Keeling] Islands",
+		"CK" => "Cook Islands",
+		"FJ" => "Fiji",
+		"PF" => "French Polynesia",
+		"TF" => "French Southern Territories",
+		"GU" => "Guam",
+		"HM" => "Heard Island and McDonald Islands",
+		"KI" => "Kiribati",
+		"MH" => "Marshall Islands",
+		"FM" => "Micronesia",
+		"NR" => "Nauru",
+		"NC" => "New Caledonia",
+		"NZ" => "New Zealand",
+		"NU" => "Niue",
+		"NF" => "Norfolk Island",
+		"MP" => "Northern Mariana Islands",
+		"PW" => "Palau",
+		"PG" => "Papua New Guinea",
+		"PN" => "Pitcairn Islands",
+		"WS" => "Samoa",
+		"SB" => "Solomon Islands",
+		"GS" => "South Georgia and the South Sandwich Islands",
+		"TK" => "Tokelau",
+		"TO" => "Tonga",
+		"TV" => "Tuvalu",
+		"UM" => "U.S. Minor Outlying Islands",
+		"VU" => "Vanuatu",
+		"WF" => "Wallis and Futuna",
+	),
+);
+
+$config["country_code"]=array(
+         '1' => "United States",
+         93    => "Afghanistan",
+        355 => "Albania",
+        213 => "Algeria",
+        '1_001' => "American Samoa",
+        376 => "Andorra",
+        244 => "Angola",
+        '1_002' => "Anguilla",
+        '1_003' => "Antigua and Barbuda",
+        54 => "Argentina",
+        374 => "Armenia",
+        297 => "Aruba",
+        247 => "Ascension",
+        61 => "Australia",
+        43 => "Austria",
+        994 => "Azerbaijan",
+        '1_004' => "Bahamas",
+        973 => "Bahrain",
+        880 => "Bangladesh",
+        '1_005' => "Barbados",
+        375 => "Belarus",
+        32 => "Belgium",
+        501 => "Belize",
+        229 => "Benin",
+        '1_006' => "Bermuda",
+        975 => "Bhutan",
+        591 => "Bolivia",
+        387 => "Bosnia and Herzegovina",
+        267 => "Botswana",
+        55 => "Brazil",
+        '1_006' => "British Virgin Islands",
+        673 => "Brunei",
+        359 => "Bulgaria",
+        226 => "Burkina Faso",
+        257 => "Burundi",
+        855 => "Cambodia",
+        237 => "Cameroon",
+        '1_007' => "Canada",
+        238 => "Cape Verde",
+        '1_008' => "Cayman Islands",
+        236 => "Central African Republic",
+        235 => "Chad",
+        56 => "Chile",
+        86 => "China",
+        57 => "Colombia",
+        269 => "Comoros",
+        242 => "Congo",
+        682 => "Cook Islands",
+        506 => "Costa Rica",
+        385 => "Croatia",
+        53 => "Cuba",
+        357 => "Cyprus",
+        420 => "Czech Republic",
+        243 => "Democratic Republic of Congo",
+        45 => "Denmark",
+        246 => "Diego Garcia",
+        253 => "Djibouti",
+        '1_009' => "Dominica",
+        '1_010' => "Dominican Republic",
+        670 => "East Timor",
+        593 => "Ecuador",
+        20 => "Egypt",
+        503 => "El Salvador",
+        240 => "Equatorial Guinea",
+        291 => "Eritrea",
+        372 => "Estonia",
+        251 => "Ethiopia",
+        500 => "Falkland (Malvinas) Islands",
+        298 => "Faroe Islands",
+        679 => "Fiji",
+        358 => "Finland",
+        33 => "France",
+        594 => "French Guiana",
+        689 => "French Polynesia",
+        241 => "Gabon",
+        220 => "Gambia",
+        995 => "Georgia",
+        49 => "Germany",
+        233 => "Ghana",
+        350 => "Gibraltar",
+        30 => "Greece",
+        299 => "Greenland",
+        '1_011' => "Grenada",
+        590 => "Guadeloupe",
+        '1_012' => "Guam",
+        502 => "Guatemala",
+        224 => "Guinea",
+        245 => "Guinea-Bissau",
+        592 => "Guyana",
+        509 => "Haiti",
+        504 => "Honduras",
+        852 => "Hong Kong",
+        36 => "Hungary",
+        354 => "Iceland",
+        91 => "India",
+        62 => "Indonesia",
+        870  => "Inmarsat Satellite",
+        98 => "Iran",
+        964 => "Iraq",
+        353 => "Ireland",
+        972 => "Israel",
+        39 => "Italy",
+        225 => "Ivory Coast",
+        '1_013' => "Jamaica",
+        81 => "Japan",
+        962 => "Jordan",
+        7 => "Kazakhstan",
+        254 => "Kenya",
+        686 => "Kiribati",
+        965 => "Kuwait",
+        996 => "Kyrgyzstan",
+        856 => "Laos",
+        371 => "Latvia",
+        961 => "Lebanon",
+        266 => "Lesotho",
+        231 => "Liberia",
+        218 => "Libya",
+        423 => "Liechtenstein",
+        370 => "Lithuania",
+        352 => "Luxembourg",
+        853 => "Macau",
+        389 => "Macedonia",
+        261 => "Madagascar",
+        265 => "Malawi",
+        60 => "Malaysia",
+        960 => "Maldives",
+        223 => "Mali",
+        356 => "Malta",
+        692 => "Marshall Islands",
+        596 => "Martinique",
+        222 => "Mauritania",
+        230 => "Mauritius",
+        262 => "Mayotte",
+        52 => "Mexico",
+        691 => "Micronesia",
+        373 => "Moldova",
+        377 => "Monaco",
+        976 => "Mongolia",
+        382 => "Montenegro",
+        '1_014' => "Montserrat",
+        212 => "Morocco",
+        258 => "Mozambique",
+        95 => "Myanmar",
+        264 => "Namibia",
+        674 => "Nauru",
+        977 => "Nepal",
+        31 => "Netherlands",
+        599 => "Netherlands Antilles",
+        687 => "New Caledonia",
+        64 => "New Zealand",
+        505 => "Nicaragua",
+        227 => "Niger",
+        234 => "Nigeria",
+        683 => "Niue Island",
+        850 => "North Korea",
+        '1_015' => "Northern Marianas",
+        47 => "Norway",
+        968 => "Oman",
+        92 => "Pakistan",
+        680 => "Palau",
+        507 => "Panama",
+        675 => "Papua New Guinea",
+        595 => "Paraguay",
+        51 => "Peru",
+        63 => "Philippines",
+        48 => "Poland",
+        351 => "Portugal",
+        '1_016' => "Puerto Rico",
+        974 => "Qatar",
+        262 => "Reunion",
+        40 => "Romania",
+        7 => "Russian Federation",
+        250 => "Rwanda",
+        290 => "Saint Helena",
+        '1_017' => "Saint Kitts and Nevis",
+        '1_018' => "Saint Lucia",
+        508 => "Saint Pierre and Miquelon",
+        '1_019' => "Saint Vincent and the Grenadines",
+        685 => "Samoa",
+        378 => "San Marino",
+        239 => "Sao Tome and Principe",
+        966 => "Saudi Arabia",
+        221 => "Senegal",
+        381 => "Serbia",
+        248 => "Seychelles",
+        232 => "Sierra Leone",
+        65 => "Singapore",
+        421 => "Slovakia",
+        386 => "Slovenia",
+        677 => "Solomon Islands",
+        252 => "Somalia",
+        27 => "South Africa",
+        82 => "South Korea",
+        34 => "Spain",
+        94 => "Sri Lanka",
+        249 => "Sudan",
+        597 => "Suriname",
+        268 => "Swaziland",
+        46 => "Sweden",
+        41 => "Switzerland",
+        963 => "Syria",
+        886 => "Taiwan",
+        992 => "Tajikistan",
+        255 => "Tanzania",
+        66 => "Thailand",
+        228 => "Togo",
+        690 => "Tokelau",
+        '1_020' => "Trinidad and Tobago",
+        216 => "Tunisia",
+        90 => "Turkey",
+        993 => "Turkmenistan",
+        '1_021' => "Turks and Caicos Islands",
+        688 => "Tuvalu",
+        256 => "Uganda",
+        380 => "Ukraine",
+        971 => "United Arab Emirates",
+        44 => "United Kingdom",
+        '1_022' => "United States of America",
+        '1_023' => "U.S. Virgin Islands",
+        
+        598 => "Uruguay",
+        998 => "Uzbekistan",
+        678 => "Vanuatu",
+        379 => "Vatican City",
+        58 => "Venezuela",
+        84 => "Vietnam",
+        681 => "Wallis and Futuna",
+        967 => "Yemen",
+        260 => "Zambia",
+        263 => "Zimbabwe"
+        );
+// THIS ARRAY SHOWS THE COUNTRIES CAN SEE THE 3 BOXES IN THE CALCULATOR
+$config["country_showsallinclusive2"]= array(
+	"AT" => "Austria",
+	"BE" => "Belgium",
+	"BG" => "Bulgaria",
+	"HR" => "Croatia",
+	"CZ" => "Czech Rep.",
+	"DK" => "Danmark",
+	"EE" => "Estonia",
+	"FI" => "Finland",
+	"FR" => "France",
+	"DE" => "Germany",
+	"GR" => "Greece",
+	"HU" => "Hungary",
+	"IE" => "Ireland",
+	"IT" => "Italy",
+	"LV" => "Lituania",
+	"LT" => "Latvia",
+	"LU" => "Luxembourg",
+	"MT" => "Malta",
+	"NL" => "Nederland",
+	"PL" => "Poland",
+	"PT" => "Portugal",
+	"RO" => "Romania",
+	"SK" => "Slovakia",
+	"SI" => "Slovenia",
+	"ES" => "Spain",
+	"SE" => "Svezia",
+	"GB" => "United Kingdom",
+);
+
+/*
+
+$config["country_code"]=array(
+        '1' => "United States",
+         93    => "Afghanistan",
+        355 => "Albania",
+        213 => "Algeria",
+        1 => "American Samoa",
+        376 => "Andorra",
+        244 => "Angola",
+        1 => "Anguilla",
+        1 => "Antigua and Barbuda",
+        54 => "Argentina",
+        374 => "Armenia",
+        297 => "Aruba",
+        247 => "Ascension",
+        61 => "Australia",
+        43 => "Austria",
+        994 => "Azerbaijan",
+        1 => "Bahamas",
+        973 => "Bahrain",
+        880 => "Bangladesh",
+        1 => "Barbados",
+        375 => "Belarus",
+        32 => "Belgium",
+        501 => "Belize",
+        229 => "Benin",
+        1 => "Bermuda",
+        975 => "Bhutan",
+        591 => "Bolivia",
+        387 => "Bosnia and Herzegovina",
+        267 => "Botswana",
+        55 => "Brazil",
+        1 => "British Virgin Islands",
+        673 => "Brunei",
+        359 => "Bulgaria",
+        226 => "Burkina Faso",
+        257 => "Burundi",
+        855 => "Cambodia",
+        237 => "Cameroon",
+        1 => "Canada",
+        238 => "Cape Verde",
+        1 => "Cayman Islands",
+        236 => "Central African Republic",
+        235 => "Chad",
+        56 => "Chile",
+        86 => "China",
+        57 => "Colombia",
+        269 => "Comoros",
+        242 => "Congo",
+        682 => "Cook Islands",
+        506 => "Costa Rica",
+        385 => "Croatia",
+        53 => "Cuba",
+        357 => "Cyprus",
+        420 => "Czech Republic",
+        243 => "Democratic Republic of Congo",
+        45 => "Denmark",
+        246 => "Diego Garcia",
+        253 => "Djibouti",
+        1 => "Dominica",
+        1 => "Dominican Republic",
+        670 => "East Timor",
+        593 => "Ecuador",
+        20 => "Egypt",
+        503 => "El Salvador",
+        240 => "Equatorial Guinea",
+        291 => "Eritrea",
+        372 => "Estonia",
+        251 => "Ethiopia",
+        500 => "Falkland (Malvinas) Islands",
+        298 => "Faroe Islands",
+        679 => "Fiji",
+        358 => "Finland",
+        33 => "France",
+        594 => "French Guiana",
+        689 => "French Polynesia",
+        241 => "Gabon",
+        220 => "Gambia",
+        995 => "Georgia",
+        49 => "Germany",
+        233 => "Ghana",
+        350 => "Gibraltar",
+        30 => "Greece",
+        299 => "Greenland",
+        1 => "Grenada",
+        590 => "Guadeloupe",
+        1 => "Guam",
+        502 => "Guatemala",
+        224 => "Guinea",
+        245 => "Guinea-Bissau",
+        592 => "Guyana",
+        509 => "Haiti",
+        504 => "Honduras",
+        852 => "Hong Kong",
+        36 => "Hungary",
+        354 => "Iceland",
+        91 => "India",
+        62 => "Indonesia",
+        870  => "Inmarsat Satellite",
+        98 => "Iran",
+        964 => "Iraq",
+        353 => "Ireland",
+        972 => "Israel",
+        39 => "Italy",
+        225 => "Ivory Coast",
+        1 => "Jamaica",
+        81 => "Japan",
+        962 => "Jordan",
+        7 => "Kazakhstan",
+        254 => "Kenya",
+        686 => "Kiribati",
+        965 => "Kuwait",
+        996 => "Kyrgyzstan",
+        856 => "Laos",
+        371 => "Latvia",
+        961 => "Lebanon",
+        266 => "Lesotho",
+        231 => "Liberia",
+        218 => "Libya",
+        423 => "Liechtenstein",
+        370 => "Lithuania",
+        352 => "Luxembourg",
+        853 => "Macau",
+        389 => "Macedonia",
+        261 => "Madagascar",
+        265 => "Malawi",
+        60 => "Malaysia",
+        960 => "Maldives",
+        223 => "Mali",
+        356 => "Malta",
+        692 => "Marshall Islands",
+        596 => "Martinique",
+        222 => "Mauritania",
+        230 => "Mauritius",
+        262 => "Mayotte",
+        52 => "Mexico",
+        691 => "Micronesia",
+        373 => "Moldova",
+        377 => "Monaco",
+        976 => "Mongolia",
+        382 => "Montenegro",
+        1 => "Montserrat",
+        212 => "Morocco",
+        258 => "Mozambique",
+        95 => "Myanmar",
+        264 => "Namibia",
+        674 => "Nauru",
+        977 => "Nepal",
+        31 => "Netherlands",
+        599 => "Netherlands Antilles",
+        687 => "New Caledonia",
+        64 => "New Zealand",
+        505 => "Nicaragua",
+        227 => "Niger",
+        234 => "Nigeria",
+        683 => "Niue Island",
+        850 => "North Korea",
+        1 => "Northern Marianas",
+        47 => "Norway",
+        968 => "Oman",
+        92 => "Pakistan",
+        680 => "Palau",
+        507 => "Panama",
+        675 => "Papua New Guinea",
+        595 => "Paraguay",
+        51 => "Peru",
+        63 => "Philippines",
+        48 => "Poland",
+        351 => "Portugal",
+        1 => "Puerto Rico",
+        974 => "Qatar",
+        262 => "Reunion",
+        40 => "Romania",
+        7 => "Russian Federation",
+        250 => "Rwanda",
+        290 => "Saint Helena",
+        1 => "Saint Kitts and Nevis",
+        1 => "Saint Lucia",
+        508 => "Saint Pierre and Miquelon",
+        1 => "Saint Vincent and the Grenadines",
+        685 => "Samoa",
+        378 => "San Marino",
+        239 => "Sao Tome and Principe",
+        966 => "Saudi Arabia",
+        221 => "Senegal",
+        381 => "Serbia",
+        248 => "Seychelles",
+        232 => "Sierra Leone",
+        65 => "Singapore",
+        421 => "Slovakia",
+        386 => "Slovenia",
+        677 => "Solomon Islands",
+        252 => "Somalia",
+        27 => "South Africa",
+        82 => "South Korea",
+        34 => "Spain",
+        94 => "Sri Lanka",
+        249 => "Sudan",
+        597 => "Suriname",
+        268 => "Swaziland",
+        46 => "Sweden",
+        41 => "Switzerland",
+        963 => "Syria",
+        886 => "Taiwan",
+        992 => "Tajikistan",
+        255 => "Tanzania",
+        66 => "Thailand",
+        228 => "Togo",
+        690 => "Tokelau",
+        1 => "Trinidad and Tobago",
+        216 => "Tunisia",
+        90 => "Turkey",
+        993 => "Turkmenistan",
+        1 => "Turks and Caicos Islands",
+        688 => "Tuvalu",
+        256 => "Uganda",
+        380 => "Ukraine",
+        971 => "United Arab Emirates",
+        44 => "United Kingdom",
+        1 => "United States of America",
+        1 => "U.S. Virgin Islands",
+        598 => "Uruguay",
+        998 => "Uzbekistan",
+        678 => "Vanuatu",
+        379 => "Vatican City",
+        58 => "Venezuela",
+        84 => "Vietnam",
+        681 => "Wallis and Futuna",
+        967 => "Yemen",
+        260 => "Zambia",
+        263 => "Zimbabwe"
+        );*/
+		$config['Europe_label']  = array(
+		"AT" => 'Austria',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"BE" => 'Belgium',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"BG" => 'Croatia',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"HR" => 'Croatia',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"CZ" => 'Czech Republic',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"DK" => 'Denmark',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"EE" => 'Estonia',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"FI" => 'Finland',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"FR" => 'France',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"DE" => 'Germany',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"GR" => 'Greece',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"HU" => 'Hungary',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"IE" => 'Ireland',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"LV" => 'Latvia',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"LT" => 'Lithuania',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"LU" => 'Luxembourg',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"MT" => 'Malta',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"NL" => 'Netherlands',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"PL" => 'Poland',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"PT" => 'Portugal',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"RO" => 'Romania',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"SK" => 'Slovakia',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"SI" => 'Slovenia',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"ES" => 'Spain',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"SE" => 'Sweden',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+		"GB" => 'United Kingdom',//array("vat"=>true,"user_type"=>array("1"=>"lang_reg_company","2"=>"lang_reg_private"),"company"=>array()),
+	);
+$config["phone_label"]=array(
+                "US" => "United States",
+		"DZ" => "Algeria",
+		"AO" => "Angola",
+		"BJ" => "Benin",
+		"BW" => "Botswana",
+		"BF" => "Burkina Faso",
+		"BI" => "Burundi",
+		"CM" => "Cameroon",
+		"CV" => "Cape Verde",
+		"CF" => "Central African Republic",
+		"TD" => "Chad",
+		"KM" => "Comoros",
+		"CG" => "Congo - Brazzaville",
+		"CD" => "Congo - Kinshasa",
+		"CI" => "Côte d’Ivoire",
+		"DJ" => "Djibouti",
+		"EG" => "Egypt",
+		"GQ" => "Equatorial Guinea",
+		"ER" => "Eritrea",
+		"ET" => "Ethiopia",
+		"GA" => "Gabon",
+		"GM" => "Gambia",
+		"GH" => "Ghana",
+		"GN" => "Guinea",
+		"GW" => "Guinea-Bissau",
+		"KE" => "Kenya",
+		"LS" => "Lesotho",
+		"LR" => "Liberia",
+		"LY" => "Libya",
+		"MG" => "Madagascar",
+		"MW" => "Malawi",
+		"ML" => "Mali",
+		"MR" => "Mauritania",
+		"MU" => "Mauritius",
+		"YT" => "Mayotte",
+		"MA" => "Morocco",
+		"MZ" => "Mozambique",
+		"NA" => "Namibia",
+		"NE" => "Niger",
+		"NG" => "Nigeria",
+		"RW" => "Rwanda",
+		"RE" => "Réunion",
+		"SH" => "Saint Helena",
+		"SN" => "Senegal",
+		"SC" => "Seychelles",
+		"SL" => "Sierra Leone",
+		"SO" => "Somalia",
+		"ZA" => "South Africa",
+		"SD" => "Sudan",
+		"SZ" => "Swaziland",
+		"ST" => "São Tomé and Príncipe",
+		"TZ" => "Tanzania",
+		"TG" => "Togo",
+		"TN" => "Tunisia",
+		"UG" => "Uganda",
+		"EH" => "Western Sahara",
+		"ZM" => "Zambia",
+		"ZW" => "Zimbabwe",
+	
+		"AI" => "Anguilla",
+		"AG" => "Antigua and Barbuda",
+		"AR" => "Argentina",
+		"AW" => "Aruba",
+		"BS" => "Bahamas",
+		"BB" => "Barbados",
+		"BZ" => "Belize",
+		"BM" => "Bermuda",
+		"BO" => "Bolivia",
+		"BR" => "Brazil",
+		"VG" => "British Virgin Islands",
+		"CA" => "Canada",
+		"KY" => "Cayman Islands",
+		"CL" => "Chile",
+		"CO" => "Colombia",
+		"CR" => "Costa Rica",
+		"CU" => "Cuba",
+		"DM" => "Dominica",
+		"DO" => "Dominican Republic",
+		"EC" => "Ecuador",
+		"SV" => "El Salvador",
+		"FK" => "Falkland Islands",
+		"GF" => "French Guiana",
+		"GL" => "Greenland",
+		"GD" => "Grenada",
+		"GP" => "Guadeloupe",
+		"GT" => "Guatemala",
+		"GY" => "Guyana",
+		"HT" => "Haiti",
+		"HN" => "Honduras",
+		"JM" => "Jamaica",
+		"MQ" => "Martinique",
+		"MX" => "Mexico",
+		"MS" => "Montserrat",
+		"AN" => "Netherlands Antilles",
+		"NI" => "Nicaragua",
+		"PA" => "Panama",
+		"PY" => "Paraguay",
+		"PE" => "Peru",
+		"PR" => "Puerto Rico",
+		"BL" => "Saint Barthélemy",
+		"KN" => "Saint Kitts and Nevis",
+		"LC" => "Saint Lucia",
+		"MF" => "Saint Martin",
+		"PM" => "Saint Pierre and Miquelon",
+		"VC" => "Saint Vincent and the Grenadines",
+		"SR" => "Suriname",
+		"TT" => "Trinidad and Tobago",
+		"TC" => "Turks and Caicos Islands",
+		"VI" => "U.S. Virgin Islands",
+		"US" => "United States",
+		"UY" => "Uruguay",
+		"VE" => "Venezuela",
+	
+		"AF" => "Afghanistan",
+		"AM" => "Armenia",
+		"AZ" => "Azerbaijan",
+		"BH" => "Bahrain",
+		"BD" => "Bangladesh",
+		"BT" => "Bhutan",
+		"BN" => "Brunei",
+		"KH" => "Cambodia",
+		"CN" => "China",
+		"CY" => "Cyprus",
+		"GE" => "Georgia",
+		"HK" => "Hong Kong SAR China",
+		"IN" => "India",
+		"ID" => "Indonesia",
+		"IR" => "Iran",
+		"IQ" => "Iraq",
+		"IL" => "Israel",
+		"JP" => "Japan",
+		"JO" => "Jordan",
+		"KZ" => "Kazakhstan",
+		"KW" => "Kuwait",
+		"KG" => "Kyrgyzstan",
+		"LA" => "Laos",
+		"LB" => "Lebanon",
+		"MO" => "Macau SAR China",
+		"MY" => "Malaysia",
+		"MV" => "Maldives",
+		"MN" => "Mongolia",
+		"MM" => "Myanmar [Burma]",
+		"NP" => "Nepal",
+		"NT" => "Neutral Zone",
+		"KP" => "North Korea",
+		"OM" => "Oman",
+		"PK" => "Pakistan",
+		"PS" => "Palestinian Territories",
+		"YD" => "People's Democratic Republic of Yemen",
+		"PH" => "Philippines",
+		"QA" => "Qatar",
+		"SA" => "Saudi Arabia",
+		"SG" => "Singapore",
+		"KR" => "South Korea",
+		"LK" => "Sri Lanka",
+		"SY" => "Syria",
+		"TW" => "Taiwan",
+		"TJ" => "Tajikistan",
+		"TH" => "Thailand",
+		"TL" => "Timor-Leste",
+		"TR" => "Turkey",
+		"TM" => "Turkmenistan",
+		"AE" => "United Arab Emirates",
+		"UZ" => "Uzbekistan",
+		"VN" => "Vietnam",
+		"YE" => "Yemen",
+	
+		"AL" => "Albania",
+		"AD" => "Andorra",
+		"AT" => "Austria",
+		"BY" => "Belarus",
+		"BE" => "Belgium",
+		"BA" => "Bosnia and Herzegovina",
+		"BG" => "Bulgaria",
+		"HR" => "Croatia",
+		"CY" => "Cyprus",
+		"CZ" => "Czech Republic",
+		"DK" => "Denmark",
+		"DD" => "East Germany",
+		"EE" => "Estonia",
+		"FO" => "Faroe Islands",
+		"FI" => "Finland",
+		"FR" => "France",
+		"DE" => "Germany",
+		"GI" => "Gibraltar",
+		"GR" => "Greece",
+		"GG" => "Guernsey",
+		"HU" => "Hungary",
+		"IS" => "Iceland",
+		"IE" => "Ireland",
+		"IM" => "Isle of Man",
+		"IT" => "Italy",
+		"JE" => "Jersey",
+		"LV" => "Latvia",
+		"LI" => "Liechtenstein",
+		"LT" => "Lithuania",
+		"LU" => "Luxembourg",
+		"MK" => "Macedonia",
+		"MT" => "Malta",
+		"FX" => "Metropolitan France",
+		"MD" => "Moldova",
+		"MC" => "Monaco",
+		"ME" => "Montenegro",
+		"NL" => "Netherlands",
+		"NO" => "Norway",
+		"PL" => "Poland",
+		"PT" => "Portugal",
+		"RO" => "Romania",
+		"RU" => "Russia",
+		"SM" => "San Marino",
+		"RS" => "Serbia",
+		"CS" => "Serbia and Montenegro",
+		"SK" => "Slovakia",
+		"SI" => "Slovenia",
+		"ES" => "Spain",
+		"SJ" => "Svalbard and Jan Mayen",
+		"SE" => "Sweden",
+		"CH" => "Switzerland",
+		"UA" => "Ukraine",
+		"SU" => "Union of Soviet Socialist Republics",
+		"GB" => "United Kingdom",
+		"VA" => "Vatican City",
+		"AX" => "Åland Islands",
+	
+		"AS" => "American Samoa",
+		"AQ" => "Antarctica",
+		"AU" => "Australia",
+		"BV" => "Bouvet Island",
+		"IO" => "British Indian Ocean Territory",
+		"CX" => "Christmas Island",
+		"CC" => "Cocos [Keeling] Islands",
+		"CK" => "Cook Islands",
+		"FJ" => "Fiji",
+		"PF" => "French Polynesia",
+		"TF" => "French Southern Territories",
+		"GU" => "Guam",
+		"HM" => "Heard Island and McDonald Islands",
+		"KI" => "Kiribati",
+		"MH" => "Marshall Islands",
+		"FM" => "Micronesia",
+		"NR" => "Nauru",
+		"NC" => "New Caledonia",
+		"NZ" => "New Zealand",
+		"NU" => "Niue",
+		"NF" => "Norfolk Island",
+		"MP" => "Northern Mariana Islands",
+		"PW" => "Palau",
+		"PG" => "Papua New Guinea",
+		"PN" => "Pitcairn Islands",
+		"WS" => "Samoa",
+		"SB" => "Solomon Islands",
+		"GS" => "South Georgia and the South Sandwich Islands",
+		"TK" => "Tokelau",
+		"TO" => "Tonga",
+		"TV" => "Tuvalu",
+		"UM" => "U.S. Minor Outlying Islands",
+		"VU" => "Vanuatu",
+		"WF" => "Wallis and Futuna",
+	
+);
+$config["default_user_type"]=array("1"=>"lang_reg_company","2"=>"lang_reg_private");
